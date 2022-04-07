@@ -31,11 +31,9 @@ WORKDIR /app/ev3rt-hrp2/cfg
 RUN make
 
 # Install the server-side app
-WORKDIR /app/ev3rt-hrp2/sdk/
+WORKDIR /app/ev3rt-hrp2/sdk/workspace
 COPY cmd/main/main .
 
-# Change directory
-WORKDIR /app/ev3rt-hrp2/sdk/workspace
 RUN mkdir project
 
 # Run App
