@@ -11,5 +11,5 @@ func main() {
 	r := mux.NewRouter()
 	routes.RegisterRoutes(r)
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":5321", nil))
 }
