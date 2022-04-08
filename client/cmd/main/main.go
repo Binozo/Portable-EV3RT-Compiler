@@ -16,7 +16,7 @@ func main() {
 		finalExecutableTargetDir = dir
 	}
 	if len(os.Args) >= 3 {
-		dir = os.Args[2] // use dest path provided by command line
+		finalExecutableTargetDir = os.Args[2] // use dest path provided by command line
 	}
 	fmt.Printf("Target Project directory is %v\n", dir)
 	fmt.Println("Zipping project files...")
