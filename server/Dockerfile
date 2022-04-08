@@ -32,7 +32,7 @@ RUN make
 
 # Install the server-side app
 WORKDIR /app/ev3rt-hrp2/sdk/workspace
-COPY cmd/main/main .
+COPY bin/main .
 
 RUN mkdir project
 
