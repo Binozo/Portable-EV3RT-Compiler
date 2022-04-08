@@ -1,0 +1,31 @@
+name: Docker Build and Push
+on: [push, workflow_dispatch]
+jobs:
+  Build-And-Push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.18' # The Go version to download (if necessary) and use.
+
+      - name: Build
+        run: |
+            cd "server/cmd/main/"
+            env GOOS=linux GOARCH=amd64 go build -o main
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+          cd server
+          docker build . --tag ghcr.io/binozo/portable-ev3-compiler:latest
+          docker push ghcr.io/binozo/portable-ev3-compiler:latest
