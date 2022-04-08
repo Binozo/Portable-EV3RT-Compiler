@@ -1,0 +1,6 @@
+version: '3'
+services:
+  ev3rt-compilser-service:
+    image: ghcr.io/binozo/portable-ev3-compiler:latest
+    ports:
+      - "5321:5321"
