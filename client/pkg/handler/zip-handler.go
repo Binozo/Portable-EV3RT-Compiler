@@ -2,6 +2,7 @@ package handler
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -25,6 +26,8 @@ func ZipFiles(path string, destPath string) error {
 			return err
 		}
 		relPath := strings.TrimPrefix(filePath, filepath.Dir(path))
+		relPath = strings.TrimPrefix(relPath, "\\")
+		fmt.Printf("Zipping %s...\n", relPath)
 		zipFile, err := myZip.Create(relPath)
 		if err != nil {
 			return err

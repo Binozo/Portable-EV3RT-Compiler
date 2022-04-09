@@ -20,9 +20,9 @@ func main() {
 	}
 	fmt.Printf("Target Project directory is %v\n", dir)
 	fmt.Println("Zipping project files...")
-	zipDest := "zippedProject.zip"
+	zipDest := filepath.Join(dir, "zippedProject.zip")
 	err := handler.ZipFiles(dir, zipDest)
-	defer os.Remove(filepath.Join(dir, zipDest))
+	defer os.Remove(zipDest)
 
 	if err != nil {
 		log.Fatal("Error: couldn't zip files: ", err)
