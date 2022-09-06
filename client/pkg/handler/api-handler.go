@@ -57,6 +57,8 @@ func UploadZipToCompilationServer(zipFilePath string, destPath string) {
 		if err != nil {
 			fmt.Println("Error writing file:", err)
 		}
+	} else {
+		log.Fatal("Response code:", responseCode)
 	}
 
 }
