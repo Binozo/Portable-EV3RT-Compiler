@@ -37,5 +37,6 @@ COPY bin/main .
 RUN mkdir project
 
 # Run App
+chmod +x main
 EXPOSE 5321
 CMD ./main
