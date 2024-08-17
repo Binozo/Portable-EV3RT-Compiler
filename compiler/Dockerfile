@@ -1,6 +1,6 @@
-FROM ubuntu:24.04
+FROM debian:trixie-slim
 
-LABEL maintainer=binozoworks
+LABEL maintainer=Binozoworks
 LABEL org.opencontainers.image.source="https://github.com/Binozo/Portable-EV3RT-Compiler"
 LABEL org.opencontainers.image.description="A portable EV3RT compiler"
 
