@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 LABEL maintainer=binozoworks
 LABEL org.opencontainers.image.source="https://github.com/Binozo/Portable-EV3RT-Compiler"
@@ -9,11 +9,8 @@ COPY . app
 WORKDIR app
 
 # Update system and install all necessary packages
-RUN apt update
-RUN apt install wget -y
-RUN apt-get install -y bzip2
-RUN apt-get -y install git
-RUN apt-get -y install make
+RUN apt-get update
+RUN apt-get install wget git bzip2 make -y
 
 # Install Compiler
 RUN wget http://ev3rt-git.github.io/public/ev3rt-prepare-ubuntu.sh
