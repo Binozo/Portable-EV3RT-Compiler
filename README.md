@@ -1,32 +1,36 @@
 # Portable EV3RT Compiler
 A portable [EV3RT](https://ev3rt-git.github.io/) compiler. No need to install all those dependencies for compilation.
 
+## Requirements
+You need the following software to be installed:
+- Docker
+- git
+
 ## Setup
-1. Pull the docker image 
-```dockerfile
-docker pull ghcr.io/binozo/portable-ev3-compiler:latest
+Clone this repository:
+```bash
+$ git clone https://github.com/Binozo/Portable-EV3RT-Compiler
+$ cd Portable-EV3RT-Compiler
+```
+Pull the compiler
+```bash
+$ docker pull ghcr.io/binozo/portable-ev3-compiler:latest
+```
+or build it yourself:
+```bash
+$ docker build -f compiler/Dockerfile -t ghcr.io/binozo/portable-ev3-compiler:latest .
 ```
 
-2. Run the container
-```dockerfile
-docker run -d -p 5321:5321 --name portable-ev3rt-compiler ghcr.io/binozo/portable-ev3-compiler:latest
+### Install EV3RT to the SD card
+You can skip this if you already have EV3RT installed on your EV3
+
+Run the following command to generate the necessary `uImage` bootable system image:
+```bash
+$ docker run -v $PWD/compiler/build:/src/ev3rt-hrp2/ --rm --env APP=loader --env DIR=base-workspace --name portable-ev3-compiler ghcr.io/binozo/portable-ev3-compiler:latest 
 ```
-(The docker-compose file can be found [here](https://github.com/Binozo/Portable-EV3RT-Compiler/blob/master/server/docker-compose.yaml))
 
-3. Download the Client
-   - [Windows](https://github.com/Binozo/Portable-EV3RT-Compiler/tree/master/client/bin/main.exe)
-   - [Linux](https://github.com/Binozo/Portable-EV3RT-Compiler/tree/master/client/bin/main)
-   - Or compile it yourself => `cd client/cmd/main/ && go build`
-
-## Usage
-You can use the client in two ways:
-1. Place the executable right into your project folder and execute it. \
-Example:
-Copy the executable file into the [helloev3 example project](https://github.com/ev3rt-git/ev3rt-hrp2-sdk/tree/d33726dd7d8000519ba2c97cb15cff382cff2dab/workspace/helloev3) and execute it. \
-The executable file for ev3rt will be in the same directory and will be named "app".
-
-2. Run the executable with two arguments: \
-`main.exe <project-path> <output-path>`
+Now copy the generated `uImage` in a newly fat32 flashed SD card in the root directory.
+Now insert the SD card into your EV3 and try to boot.
 
 ## Running the ev3rt app
 [Official EV3RT Docs](https://ev3rt-git.github.io/get_started/#step-5-try-it-out) 
