@@ -29,7 +29,7 @@ Run the following command to generate the necessary `uImage` bootable system ima
 $ docker run -v $PWD/compiler/build:/src/ev3rt-hrp2/ --rm --env APP=loader --env DIR=base-workspace --name portable-ev3-compiler ghcr.io/binozo/portable-ev3-compiler:latest 
 ```
 
-Now copy the generated `uImage` in a newly fat32 flashed SD card in the root directory.
+Now copy the generated `compiler/build/base-workspace/uImage` in a newly fat32 flashed SD card in the root directory.
 Now insert the SD card into your EV3 and try to boot.
 
 ## Running the ev3rt app
