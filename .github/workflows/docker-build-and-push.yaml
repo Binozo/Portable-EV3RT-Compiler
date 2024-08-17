@@ -16,4 +16,4 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -f compiler/Dockerfile --tag ghcr.io/binozo/portable-ev3-compiler:latest --push
+          docker build compiler/Dockerfile --tag ghcr.io/binozo/portable-ev3-compiler:latest --push
