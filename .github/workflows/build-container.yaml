@@ -1,0 +1,40 @@
+name: Docker Build and Push
+on: [push, workflow_dispatch]
+jobs:
+  Build-HRP2-And-Push:
+    name: "Build EV3RT HRP2 version"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+          cd compiler
+          docker build . --tag ghcr.io/binozo/portable-ev3rt-compiler:hrp2 --push
+
+  Build-HRP3-And-Push:
+    name: "Build EV3RT HRP3 version"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+          cd compiler
+          docker build --build-arg HRP_KERNEL_VERSION=3 . --tag ghcr.io/binozo/portable-ev3rt-compiler:hrp3 --push
